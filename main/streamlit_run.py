@@ -32,7 +32,6 @@ def store_in_bigquery(dataset_id, table_id, data):
     else:
         print("Data successfully inserted into BigQuery.")
 
-
 def process_with_selected_tasks(text, selected_tasks):
     """
     Process the text based on the selected tasks and store results in BigQuery.
@@ -43,6 +42,9 @@ def process_with_selected_tasks(text, selected_tasks):
 
     state = {"messages": [HumanMessage(content=text)]}
     final_state = workflow.invoke(state)
+
+    # Debugging
+    print("Final State Debug:", final_state)
 
     results = {}
     if "Summary" in selected_tasks:
@@ -55,6 +57,14 @@ def process_with_selected_tasks(text, selected_tasks):
             "Publication Date": metadata.get("publication_date", "N/A"),
             "Abstract": metadata.get("abstract", "N/A"),
         }
+    else:
+        # Ensure Metadata key is always present
+        results["Metadata"] = {
+            "Title": "N/A",
+            "Authors": [],
+            "Publication Date": "N/A",
+            "Abstract": "N/A",
+        }
     if "Sentiment Analysis" in selected_tasks:
         results["Sentiment"] = final_state.get("sentiment", "Unknown")
     if "Entity Recognition" in selected_tasks:
@@ -63,20 +73,20 @@ def process_with_selected_tasks(text, selected_tasks):
     # Prepare data for BigQuery
     bigquery_data = {
         "document_id": hash(text),  # Use hash of the text as a unique document ID
-        "title": results["Metadata"].get("Title", "N/A"),
-        "authors": results["Metadata"].get("Authors", []),
-        "publication_date": results["Metadata"].get("Publication Date", "N/A"),
-        "abstract": results["Metadata"].get("Abstract", "N/A"),
+        "title": results.get("Metadata", {}).get("Title", "N/A"),
+        "authors": results.get("Metadata", {}).get("Authors", []),
+        "publication_date": results.get("Metadata", {}).get("Publication Date", "N/A"),
+        "abstract": results.get("Metadata", {}).get("Abstract", "N/A"),
         "summary": results.get("Summary", "N/A"),
         "sentiment": results.get("Sentiment", "Unknown"),
         "entities": results.get("Entities", {}),
     }
 
     # Send data to BigQuery
-
-    #store_in_bigquery("llm_metadata", "documents", bigquery_data)
+    # store_in_bigquery("llm_metadata", "documents", bigquery_data)
 
     return results
+
 
 
 def main():
