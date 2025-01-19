@@ -19,3 +19,10 @@ Information Extraction:
 Data Storage
 ● Design a BigQuery schema to store the extracted information
 ● Implement data loading to BigQuery
+
+
+## Configuration
+Create a `.streamlit/secrets.toml` file in the root directory with the following format:
+
+```toml
+OPENAI_API_KEY = "your_openai_api_key_here"

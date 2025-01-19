@@ -28,3 +28,5 @@ venv_llm/
 main/key.py
 #pycache
 __pycache__/
+#.streamlit
+.streamlit/

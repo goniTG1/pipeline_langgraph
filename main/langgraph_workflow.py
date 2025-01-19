@@ -2,7 +2,7 @@ from langgraph.graph import StateGraph
 from langchain_core.messages import HumanMessage
 from typing import TypedDict, List
 from openai import OpenAI
-from key import key_value
+import streamlit as st
 
 
 
@@ -15,11 +15,7 @@ class StateSchema(TypedDict):
     entities: dict
 
 
-import os
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
-
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def summarization_node(state: StateSchema):
     """Summarize document content using the latest OpenAI API."""
