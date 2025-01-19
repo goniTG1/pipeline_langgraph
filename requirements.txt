@@ -17,3 +17,4 @@ torchvision
 torchaudio
 streamlit>=1.39.0
 openai>=1.42.0
+tornado>=6.4.2
