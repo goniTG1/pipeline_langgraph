@@ -65,14 +65,6 @@ def process_pdfs(base_folder, topic, max_pages=10, num_files=1):
     return processed_texts
 
 
-
-# Load NLP models
-nlp = spacy.load("en_core_web_sm")  # For NER
-sentiment_model = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
-#sentiment_model = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english", device=-1)
-
-
-
 def extract_keywords(text, top_n=5):
     """
     Extract the top_n keywords from the text using TF-IDF.
@@ -95,24 +87,3 @@ def classify_topic(text):
         return "Biology/Health"
     else:
         return "General"
-
-
-def analyze_sentiment(text):
-    """
-    Perform sentiment analysis using a pre-trained model.
-    """
-    result = sentiment_model(text[:512])  # Limit to 512 characters for transformer models
-    return result[0]["label"]
-
-
-def extract_entities(text):
-    """
-    Extract entities (names, dates, amounts) using spaCy.
-    """
-    doc = nlp(text)
-    entities = {
-        "names": [ent.text for ent in doc.ents if ent.label_ == "PERSON"],
-        "dates": [ent.text for ent in doc.ents if ent.label_ == "DATE"],
-        "amounts": [ent.text for ent in doc.ents if ent.label_ in ["MONEY", "CARDINAL"]],
-    }
-    return entities
