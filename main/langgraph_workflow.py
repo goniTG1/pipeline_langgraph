@@ -15,7 +15,10 @@ class StateSchema(TypedDict):
     entities: dict
 
 
-client = OpenAI(api_key=key_value)
+import os
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def summarization_node(state: StateSchema):
