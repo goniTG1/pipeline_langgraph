@@ -116,7 +116,7 @@ def main():
         )
 
         # Check if the key exists in st.secrets
-        if "OPENAI_API_KEY" in st.secrets:
+        if "openai" in st.secrets and "OPENAI_API_KEY" in st.secrets["openai"]:
             st.write("API Key loaded successfully.")
         else:
             st.error("API Key not found in st.secrets!")
