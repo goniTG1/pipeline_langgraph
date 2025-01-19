@@ -1,0 +1,17 @@
+langgraph
+langchain_openai
+langchain_core
+langchain_community
+PyMuPDF
+requests
+beautifulsoup4
+google-cloud-storage
+google-cloud-bigquery
+streamlit
+scikit-learn
+spacy
+transformers
+watchdog
+torch
+torchvision
+torchaudio

@@ -1,0 +1,65 @@
+# Updating the text file with the new configurations to include support for processing multiple PDFs
+updated_configurations = """
+# Instructions for Running the Research Paper Pipeline
+
+## General Usage
+Run the script with the following command structure:
+    python main.py <command> [options]
+
+---
+
+## Commands and Options
+
+### 1. Full Pipeline (Downloader + Processor)
+Run the full pipeline to download papers and process multiple PDFs:
+    python main.py full --topic "<topic>" --max_pages <max_pages> --num_results <num_results> --num_files <num_files>
+
+Example:
+    python main.py full --topic "machine learning" --max_pages 10 --num_results 5 --num_files 3
+
+---
+
+### 2. Data Downloader Only
+Run only the data downloader to fetch papers for a given topic:
+    python main.py downloader --topic "<topic>" --num_results <num_results>
+
+Example:
+    python main.py downloader --topic "artificial intelligence" --num_results 5
+
+---
+
+### 3. Data Processor Only
+Run only the data processor to process multiple PDFs from a topic:
+    python main.py processor --topic "<topic>" --max_pages <max_pages> --num_files <num_files>
+
+Example:
+    python main.py processor --topic "deep learning" --max_pages 15 --num_files 2
+
+---
+
+## Default Behavior
+If no command is provided, the script defaults to running the full pipeline:
+    python main.py
+
+This will use the default settings:
+- Topic: "deep learning"
+- Max pages per PDF: 10
+- Number of papers to download: 5
+- Number of PDFs to process: 1
+
+---
+
+## Notes
+1. Replace `<topic>` with your desired research topic (e.g., "natural language processing").
+2. Adjust `<max_pages>`, `<num_results>`, and `<num_files>` as needed for your requirements.
+3. Ensure the `data/` directory is writable for storing downloaded PDFs.
+
+Happy processing!
+"""
+
+# Save the updated configurations to the same file
+file_path = "pipeline_instructions.txt"
+with open(file_path, "w") as file:
+    file.write(updated_configurations)
+
+file_path
