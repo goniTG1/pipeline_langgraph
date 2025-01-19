@@ -15,7 +15,7 @@ class StateSchema(TypedDict):
     entities: dict
 
 
-client = OpenAI(api_key=st.secrets["openai"]["OPENAI_API_KEY"])
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def summarization_node(state: StateSchema):
     """Summarize document content using the latest OpenAI API."""

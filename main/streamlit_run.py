@@ -115,12 +115,6 @@ def main():
             key="upload_tasks",
         )
 
-        # Check if the key exists in st.secrets
-        if "openai" in st.secrets and "OPENAI_API_KEY" in st.secrets["openai"]:
-            st.write("API Key loaded successfully.")
-        else:
-            st.error("API Key not found in st.secrets!")
-
         if uploaded_file is not None:
             # Save the uploaded file to disk
             with open("uploaded_file.pdf", "wb") as f:
