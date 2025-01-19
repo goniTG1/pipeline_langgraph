@@ -46,6 +46,7 @@ def process_with_selected_tasks(text, selected_tasks):
     # Debugging
     print("Final State Debug:", final_state)
 
+
     results = {}
     if "Summary" in selected_tasks:
         results["Summary"] = final_state.get("summary", "No summary generated.")
@@ -113,6 +114,12 @@ def main():
             default=["Summary"],
             key="upload_tasks",
         )
+
+        # Check if the key exists in st.secrets
+        if "OPENAI_API_KEY" in st.secrets:
+            st.write("API Key loaded successfully.")
+        else:
+            st.error("API Key not found in st.secrets!")
 
         if uploaded_file is not None:
             # Save the uploaded file to disk
