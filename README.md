@@ -21,8 +21,13 @@ Data Storage
 ● Implement data loading to BigQuery
 
 
+This project requires a working and active OPENAI API key. 
+
 ## Configuration
 Create a `.streamlit/secrets.toml` file in the root directory with the following format:
 
 ```toml
 OPENAI_API_KEY = "your_openai_api_key_here"
+```
+
+
